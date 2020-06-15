@@ -26,7 +26,7 @@ class App extends Component {
     const persons = this.state.persons.slice();
     persons.splice(index, 1);
     this.setState({ persons: persons })
-    console.log(this.state)
+    // console.log(this.state)
   }
 
   inputNameHandler = (e, id) => {
