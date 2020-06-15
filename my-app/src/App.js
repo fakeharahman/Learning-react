@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// import Radium, { StyleRoot } from "radium";
+
 import Person from "./Person/Person"
 import './App.css';
 
@@ -54,6 +56,22 @@ class App extends Component {
 
   render() {
 
+
+    const style = {
+      backgroundColor: "gray",
+      color: "white",
+      font: "inherit",
+      padding: "8px",
+      border: "1px solid blue",
+      boxShadow: "0px 2px 3px #000",
+      cursor: "pointer",
+      // ":hover": {
+      //   backgroundColor: "lightgray",
+      //   color: "black"
+
+      // }
+    }
+
     let persons = null;
 
     if (this.state.showPersons) {
@@ -67,33 +85,29 @@ class App extends Component {
                 key={person.id}
                 changed={(e) => this.inputNameHandler(e, person.id)} />)
           }
-          {/* <Person name={this.state.persons[0].name}
-            age={this.state.persons[0].age} />
-          <Person name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={this.nameChangeHandler.bind(this, "fakeha!!")}
-            changed={this.inputNameHandler}>Yoyoyoyoy</Person>
-          <Person name={this.state.persons[2].name}
-            age={this.state.persons[2].age} /> */}
+
         </div>
       );
+      style.backgroundColor = "green";
+      // style[":hover"] = {
+      //   backgroundColor: "lightgreen",
+      //   color: "black"
+      // }
 
     }
 
-    const style = {
-      backgroundColor: "gray",
-      color: "white",
-      font: "inherit",
-      padding: "8px",
-      border: "1px solid blue",
-      boxShadow: "0px 2px 3px #000",
-      cursor: "pointer"
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push("red");
+    } if (this.state.persons.length <= 1) {
+      classes.push("bold")
     }
 
     return (
+
       <div className="App">
         <h1>heyya React app here!</h1>
-        <p>Its working yayayaya</p>
+        <p className={classes.join(" ")}>Its working yayayaya</p>
         <button
           style={style}
           onClick={this.togglePersonHandler}>Toggle perosns</button>
@@ -103,6 +117,7 @@ class App extends Component {
 
 
       </div>
+
     );
     // return React.createElement("div", { className: 'App' }, "h1", "heyyy")
   }
