@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
 // import Radium, { StyleRoot } from "radium";
-
+// import styled from "styled-components";
 import Person from "./Person/Person"
 import './App.css';
 
+
+// const StyledButton = styled.button`
+// background-color: ${props => props.alt ? "green" : "gray"};
+// color: white;
+// font: inherit;
+// padding: 8px;
+// border: 1px solid blue;
+// box-shadow: 0px 2px 3px #000;
+// cursor: pointer;
+// &:hover {
+//  background-color: ${props => props.alt ? "lightgreen" : "lightgray"};
+//  color: black;
+// `
 class App extends Component {
   state = {
     persons: [
       { id: "11", name: "fakeha", age: 28 },
       { id: "32", name: "sidra", age: 50 },
-      { id: "223", name: "Rahil", age: 27 }
+      { id: "223", name: "Rahil", age: 20 }
     ],
     other: "some other state",
     showPersons: true
@@ -88,7 +101,7 @@ class App extends Component {
 
         </div>
       );
-      style.backgroundColor = "green";
+      // style.backgroundColor = "green";
       // style[":hover"] = {
       //   backgroundColor: "lightgreen",
       //   color: "black"
@@ -108,8 +121,9 @@ class App extends Component {
       <div className="App">
         <h1>heyya React app here!</h1>
         <p className={classes.join(" ")}>Its working yayayaya</p>
-        <button
-          style={style}
+        <button className="button"
+          // style={style}
+          alt={this.state.showPersons}
           onClick={this.togglePersonHandler}>Toggle perosns</button>
 
         {persons}
