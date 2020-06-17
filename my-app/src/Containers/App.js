@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 // import Radium, { StyleRoot } from "radium";
 // import styled from "styled-components";
-import Person from "./Person/Person"
-import './App.css';
+// import Person from "../Components/Persons/Person/Person"
+import Persons from "../Components/Persons/Persons";
+import classes from './App.css';
+import Cockpit from "../Components/Cockpit/Cockpit"
+// import ErrorBoundry from "../Components/ErrorBoundry/ErrorBoundry"
+
 
 
 // const StyledButton = styled.button`
@@ -70,37 +74,29 @@ class App extends Component {
   render() {
 
 
-    const style = {
-      backgroundColor: "gray",
-      color: "white",
-      font: "inherit",
-      padding: "8px",
-      border: "1px solid blue",
-      boxShadow: "0px 2px 3px #000",
-      cursor: "pointer",
-      // ":hover": {
-      //   backgroundColor: "lightgray",
-      //   color: "black"
-
-      // }
-    }
 
     let persons = null;
 
     if (this.state.showPersons) {
       persons = (
         <div>
-          {
-            this.state.persons
-              .map((person, index) => <Person
-                name={person.name} age={person.age}
-                click={() => this.deletePersonHandler(index)}
-                key={person.id}
-                changed={(e) => this.inputNameHandler(e, person.id)} />)
+          {<Persons clicked={this.deletePersonHandler}
+            changed={this.inputNameHandler}
+            persons={this.state.persons} />
+
+            // this.state.persons
+            //   .map((person, index) => <Person
+            //     name={person.name} age={person.age}
+            //     key={person.id}
+            //     click={() => this.deletePersonHandler(index)}
+
+            //     changed={(e) => this.inputNameHandler(e, person.id)} />)
           }
 
         </div>
       );
+
+
       // style.backgroundColor = "green";
       // style[":hover"] = {
       //   backgroundColor: "lightgreen",
@@ -109,23 +105,12 @@ class App extends Component {
 
     }
 
-    const classes = [];
-    if (this.state.persons.length <= 2) {
-      classes.push("red");
-    } if (this.state.persons.length <= 1) {
-      classes.push("bold")
-    }
 
     return (
 
-      <div className="App">
-        <h1>heyya React app here!</h1>
-        <p className={classes.join(" ")}>Its working yayayaya</p>
-        <button className="button"
-          // style={style}
-          alt={this.state.showPersons}
-          onClick={this.togglePersonHandler}>Toggle perosns</button>
+      <div className={classes.App}>
 
+        <Cockpit persons={this.state.persons} showPersons={this.state.showPersons} click={this.togglePersonHandler} />
         {persons}
 
 
