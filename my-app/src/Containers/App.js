@@ -22,6 +22,11 @@ import Cockpit from "../Components/Cockpit/Cockpit"
 //  color: black;
 // `
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log("hehe app.js constructor")
+  }
+
   state = {
     persons: [
       { id: "11", name: "fakeha", age: 28 },
@@ -29,17 +34,13 @@ class App extends Component {
       { id: "223", name: "Rahil", age: 20 }
     ],
     other: "some other state",
-    showPersons: true
+    showPersons: false
+  }
+  static getDerivedStateFromProps(props, state) {
+    console.log("get derived from props", props)
+    return state;
   }
 
-  // nameChangeHandler = (newName) => {
-  //   this.setState({
-  //     persons: [{ name: newName, age: 20 },
-  //     { name: "sidra", age: 50 }, {
-  //       name: "Rahil", age: 22
-  //     }]
-  //   })
-  // }
 
   deletePersonHandler = (index) => {
     const persons = this.state.persons.slice();
@@ -56,13 +57,6 @@ class App extends Component {
     persons[personIndex] = person;
     this.setState({ persons: persons })
 
-
-    // this.setState({
-    //   persons: [{ name: "fakeha", age: 28 },
-    //   { name: e.target.value, age: 50 }, {
-    //     name: "Rahil", age: 27
-    //   }]
-    // })
   }
 
   togglePersonHandler = () => {
@@ -72,29 +66,16 @@ class App extends Component {
   }
 
   render() {
-
+    console.log("app js render")
 
 
     let persons = null;
 
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          {<Persons clicked={this.deletePersonHandler}
-            changed={this.inputNameHandler}
-            persons={this.state.persons} />
-
-            // this.state.persons
-            //   .map((person, index) => <Person
-            //     name={person.name} age={person.age}
-            //     key={person.id}
-            //     click={() => this.deletePersonHandler(index)}
-
-            //     changed={(e) => this.inputNameHandler(e, person.id)} />)
-          }
-
-        </div>
-      );
+      persons = <Persons clicked={this.deletePersonHandler}
+        changed={this.inputNameHandler}
+        persons={this.state.persons} />
+        ;
 
 
       // style.backgroundColor = "green";
@@ -110,7 +91,10 @@ class App extends Component {
 
       <div className={classes.App}>
 
-        <Cockpit persons={this.state.persons} showPersons={this.state.showPersons} click={this.togglePersonHandler} />
+        <Cockpit persons={this.state.persons}
+          title={this.props.title}
+          showPersons={this.state.showPersons}
+          click={this.togglePersonHandler} />
         {persons}
 
 
