@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import classes from './Cockpit.css';
 import AuthContext from '../../context/auth-context';
 
@@ -6,6 +6,9 @@ import AuthContext from '../../context/auth-context';
 const cockpit = (props) => {
 
     const togglePeronsRef = useRef();
+    const authContext = useContext(AuthContext)
+
+    console.log(authContext.authenticated)
 
     useEffect(() => {
         togglePeronsRef.current.click();
@@ -39,7 +42,7 @@ const cockpit = (props) => {
                 // alt={this.state.showPersons}
                 ref={togglePeronsRef}
                 onClick={props.click}>Toggle perosns</button>
-            <AuthContext.Consumer>{(context) => <button onClick={context.login}>Log in</button>}</AuthContext.Consumer>
+            <button onClick={authContext.login}>Log in</button>
 
         </div>)
 }
