@@ -11,7 +11,7 @@ class FullPost extends Component {
     componentDidUpdate() {
         if (this.props.id) {
             if (!this.state.loadedPost || (this.state.loadedPost && this.props.id !== this.state.loadedPost.id)) {
-                axios.get("http://jsonplaceholder.typicode.com/posts/" + this.props.id)
+                axios.get("/posts/" + this.props.id)
                     .then(response => {
                         this.setState({ loadedPost: response.data })
                         console.log(response)
@@ -21,7 +21,7 @@ class FullPost extends Component {
     }
 
     deleteDataHandler = () => {
-        axios.delete("http://jsonplaceholder.typicode.com/posts/" + this.props.id)
+        axios.delete("/posts/" + this.props.id)
             .then(response => {
                 console.log(response)
             })
@@ -37,4 +37,16 @@ class FullPost extends Component {
                 <div className="FullPost">
                     <h1>{this.state.loadedPost.title}</h1>
                     <p>{this.state.loadedPost.body}</p>
-                    <div className="E
+                    <div className="Edit">
+                        <button className="Delete" onClick={this.deleteDataHandler}>Delete</button>
+                    </div>
+                </div>
+
+            );
+        }
+
+        return post;
+    }
+}
+
+export default FullPost;
