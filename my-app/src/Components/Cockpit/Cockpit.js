@@ -10,7 +10,7 @@ const cockpit = (props) => {
 
     console.log(authContext.authenticated)
 
-    useEffect(() => {
+    useEffect(() => { // runs after the render
         togglePeronsRef.current.click();
         console.log("cockpit.js UseEffect")
         // alert("useeffect") 
